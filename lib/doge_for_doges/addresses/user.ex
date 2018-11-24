@@ -2,7 +2,6 @@ defmodule DogeForDoges.Addresses.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "users" do
     field :address, :string
     field :coordinates, :string

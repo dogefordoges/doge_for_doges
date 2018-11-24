@@ -11,12 +11,14 @@ defmodule DogeForDogesWeb.TransactionView do
   end
 
   def render("transaction.json", %{transaction: transaction}) do
-    %{id: transaction.id,
+    %{
+      id: transaction.id,
       transaction_id: transaction.transaction_id,
       southwestX: transaction.southwestX,
       southwestY: transaction.southwestY,
       northeastX: transaction.northeastX,
       northeastY: transaction.northeastY,
-      value: transaction.value}
+      value: transaction.value
+    }
   end
 end

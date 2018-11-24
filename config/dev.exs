@@ -75,4 +75,3 @@ config :doge_for_doges, DogeForDoges.Repo,
   pool_size: 10
 
 import_config "dev.secret.exs"
-

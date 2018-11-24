@@ -12,7 +12,6 @@ defmodule DogeForDogesWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    
     %{
       "address" => address,
       "coordinates" => coordinates,
@@ -21,10 +20,10 @@ defmodule DogeForDogesWeb.UserController do
 
     with {:ok, true} <- Dogex.verify_message(address, coordinates, signature) do
       with {:ok, %User{} = user} <- Addresses.create_user(user_params) do
-	conn
-	|> put_status(:created)
-	|> put_resp_header("location", Routes.user_path(conn, :show, user))
-	|> render("show.json", user: user)
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", Routes.user_path(conn, :show, user))
+        |> render("show.json", user: user)
       end
     else
       {:error, reason} -> json(conn, %{:error => reason})

@@ -11,9 +11,11 @@ defmodule DogeForDogesWeb.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id,
+    %{
+      id: user.id,
       address: user.address,
       coordinates: user.coordinates,
-      signature: user.signature}
+      signature: user.signature
+    }
   end
 end

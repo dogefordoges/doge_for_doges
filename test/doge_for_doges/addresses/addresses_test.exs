@@ -6,8 +6,16 @@ defmodule DogeForDoges.AddressesTest do
   describe "users" do
     alias DogeForDoges.Addresses.User
 
-    @valid_attrs %{address: "some address", coordinates: "some coordinates", signature: "some signature"}
-    @update_attrs %{address: "some updated address", coordinates: "some updated coordinates", signature: "some updated signature"}
+    @valid_attrs %{
+      address: "some address",
+      coordinates: "some coordinates",
+      signature: "some signature"
+    }
+    @update_attrs %{
+      address: "some updated address",
+      coordinates: "some updated coordinates",
+      signature: "some updated signature"
+    }
     @invalid_attrs %{address: nil, coordinates: nil, signature: nil}
 
     def user_fixture(attrs \\ %{}) do

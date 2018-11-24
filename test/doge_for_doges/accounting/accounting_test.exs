@@ -6,9 +6,30 @@ defmodule DogeForDoges.AccountingTest do
   describe "transactions" do
     alias DogeForDoges.Accounting.Transaction
 
-    @valid_attrs %{northeastX: 120.5, northeastY: 120.5, southwestX: 120.5, southwestY: 120.5, transaction_id: "some transaction_id", value: 120.5}
-    @update_attrs %{northeastX: 456.7, northeastY: 456.7, southwestX: 456.7, southwestY: 456.7, transaction_id: "some updated transaction_id", value: 456.7}
-    @invalid_attrs %{northeastX: nil, northeastY: nil, southwestX: nil, southwestY: nil, transaction_id: nil, value: nil}
+    @valid_attrs %{
+      northeastX: 120.5,
+      northeastY: 120.5,
+      southwestX: 120.5,
+      southwestY: 120.5,
+      transaction_id: "some transaction_id",
+      value: 120.5
+    }
+    @update_attrs %{
+      northeastX: 456.7,
+      northeastY: 456.7,
+      southwestX: 456.7,
+      southwestY: 456.7,
+      transaction_id: "some updated transaction_id",
+      value: 456.7
+    }
+    @invalid_attrs %{
+      northeastX: nil,
+      northeastY: nil,
+      southwestX: nil,
+      southwestY: nil,
+      transaction_id: nil,
+      value: nil
+    }
 
     def transaction_fixture(attrs \\ %{}) do
       {:ok, transaction} =
@@ -45,7 +66,10 @@ defmodule DogeForDoges.AccountingTest do
 
     test "update_transaction/2 with valid data updates the transaction" do
       transaction = transaction_fixture()
-      assert {:ok, %Transaction{} = transaction} = Accounting.update_transaction(transaction, @update_attrs)
+
+      assert {:ok, %Transaction{} = transaction} =
+               Accounting.update_transaction(transaction, @update_attrs)
+
       assert transaction.northeastX == 456.7
       assert transaction.northeastY == 456.7
       assert transaction.southwestX == 456.7
@@ -56,7 +80,10 @@ defmodule DogeForDoges.AccountingTest do
 
     test "update_transaction/2 with invalid data returns error changeset" do
       transaction = transaction_fixture()
-      assert {:error, %Ecto.Changeset{}} = Accounting.update_transaction(transaction, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Accounting.update_transaction(transaction, @invalid_attrs)
+
       assert transaction == Accounting.get_transaction!(transaction.id)
     end
 

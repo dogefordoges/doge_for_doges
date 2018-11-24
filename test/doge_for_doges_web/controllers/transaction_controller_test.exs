@@ -20,7 +20,14 @@ defmodule DogeForDogesWeb.TransactionControllerTest do
     transaction_id: "some updated transaction_id",
     value: 456.7
   }
-  @invalid_attrs %{northeastX: nil, northeastY: nil, southwestX: nil, southwestY: nil, transaction_id: nil, value: nil}
+  @invalid_attrs %{
+    northeastX: nil,
+    northeastY: nil,
+    southwestX: nil,
+    southwestY: nil,
+    transaction_id: nil,
+    value: nil
+  }
 
   def fixture(:transaction) do
     {:ok, transaction} = Accounting.create_transaction(@create_attrs)
@@ -65,8 +72,13 @@ defmodule DogeForDogesWeb.TransactionControllerTest do
   describe "update transaction" do
     setup [:create_transaction]
 
-    test "renders transaction when data is valid", %{conn: conn, transaction: %Transaction{id: id} = transaction} do
-      conn = put(conn, Routes.transaction_path(conn, :update, transaction), transaction: @update_attrs)
+    test "renders transaction when data is valid", %{
+      conn: conn,
+      transaction: %Transaction{id: id} = transaction
+    } do
+      conn =
+        put(conn, Routes.transaction_path(conn, :update, transaction), transaction: @update_attrs)
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.transaction_path(conn, :show, id))
@@ -83,7 +95,9 @@ defmodule DogeForDogesWeb.TransactionControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, transaction: transaction} do
-      conn = put(conn, Routes.transaction_path(conn, :update, transaction), transaction: @invalid_attrs)
+      conn =
+        put(conn, Routes.transaction_path(conn, :update, transaction), transaction: @invalid_attrs)
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

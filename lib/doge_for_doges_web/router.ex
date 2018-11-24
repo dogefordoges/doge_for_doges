@@ -24,6 +24,6 @@ defmodule DogeForDogesWeb.Router do
     pipe_through :api
 
     resources "/users", UserController
-    resources "/transactions", TransactionController    
+    resources "/transactions", TransactionController
   end
 end

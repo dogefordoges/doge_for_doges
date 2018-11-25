@@ -18,7 +18,7 @@ defmodule DogeForDogesWeb.UserController do
       "signature" => signature
     } = user_params
 
-    with {:ok, true} <- Dogex.verify_message(address, coordinates, signature) do
+    with {:ok, true} <- Dogex.verify_message(address, signature, coordinates) do
       with {:ok, %User{} = user} <- Addresses.create_user(user_params) do
         conn
         |> put_status(:created)
@@ -36,19 +36,19 @@ defmodule DogeForDogesWeb.UserController do
     render(conn, "show.json", user: user)
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Addresses.get_user!(id)
+  # def update(conn, %{"id" => id, "user" => user_params}) do
+  #   user = Addresses.get_user!(id)
 
-    with {:ok, %User{} = user} <- Addresses.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
-    end
-  end
+  #   with {:ok, %User{} = user} <- Addresses.update_user(user, user_params) do
+  #     render(conn, "show.json", user: user)
+  #   end
+  # end
 
-  def delete(conn, %{"id" => id}) do
-    user = Addresses.get_user!(id)
+  # def delete(conn, %{"id" => id}) do
+  #   user = Addresses.get_user!(id)
 
-    with {:ok, %User{}} <- Addresses.delete_user(user) do
-      send_resp(conn, :no_content, "")
-    end
-  end
+  #   with {:ok, %User{}} <- Addresses.delete_user(user) do
+  #     send_resp(conn, :no_content, "")
+  #   end
+  # end
 end

@@ -17,7 +17,7 @@ defmodule DogeForDoges do
   end
 
   def get_transaction(tx_hash) do
-    with {:ok, raw_tx} <- Dogex.get_raw_transction(tx_hash) do
+    with {:ok, raw_tx} <- Dogex.get_raw_transaction(tx_hash) do
       with {:ok, %{"vout" => outputs}} <- Dogex.decode_raw_transaction(raw_tx) do
         {:ok, outputs}
       else
@@ -30,7 +30,7 @@ defmodule DogeForDoges do
 
   def total_value(decoded_outputs) do
     av_tuples =
-      outputs
+      decoded_outputs
       |> Enum.map(fn output ->
         %{
           "value" => value,
@@ -40,7 +40,7 @@ defmodule DogeForDoges do
         {Enum.at(addresses, 0), value}
       end)
       |> Enum.filter(fn {address, _value} ->
-        address == Application.get_env(:dogecoin, :address)
+        address == Application.get_env(:doge_for_doges, :dogecoin_address)
       end)
 
     if length(av_tuples) > 0 do

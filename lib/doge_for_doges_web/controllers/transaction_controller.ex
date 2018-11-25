@@ -13,7 +13,8 @@ defmodule DogeForDogesWeb.TransactionController do
 
   def create(conn, %{"transaction" => transaction_params}) do
     with {:ok, value} <-
-           DogeForDoges.validate_transaction(Map.get(transaction_params, "transaction_id")) do
+    DogeForDoges.validate_transaction(Map.get(transaction_params, "transaction_id")) do
+      #Add value to transaction_params
       with {:ok, %Transaction{} = transaction} <-
              Accounting.create_transaction(transaction_params) do
         conn
